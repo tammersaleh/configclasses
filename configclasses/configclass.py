@@ -226,7 +226,8 @@ def _process_config_class(cls, sources):
         Reload all sources and then re-init self.
         """
         for source in self.sources:
-            source.reload()
+            if hasattr(source, "reload"):
+                source.reload()
 
         global _INSTANCE_REGISTRY
         cls = type(self)
